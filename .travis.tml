@@ -1,0 +1,21 @@
+language: go
+
+go:
+  - 1.9
+
+services:
+  - docker
+
+before_install:
+  - docker pull picadoh/motocker
+  - docker run --name s3 -d -e MOTO_SERVICE=s3 -p 5001:5000 -i picadoh/motocker
+  - pip install --user awscli
+  - export PATH=$PATH:$HOME/.local/bin
+  - aws s3 mb s3://redis3-test --endpoint-url http://127.0.0.1:5001
+  - go get -t -v ./...
+
+script:
+  - go test -race -coverprofile=coverage.txt -covermode=atomic
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
