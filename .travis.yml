@@ -11,6 +11,8 @@ before_install:
   - docker run --name s3 -d -e MOTO_SERVICE=s3 -p 5001:5000 -i picadoh/motocker
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
+  - export AWS_ACCESS_KEY_ID=DUMMYAWSACCESSKEY
+  - export AWS_SECRET_ACCESS_KEY=DUMMYAWSSECRETACCESSKEY
   - aws s3 mb s3://redis3-test --endpoint-url http://127.0.0.1:5001
   - go get -t -v ./...
 
