@@ -94,4 +94,27 @@ func TestRediS3Client(t *testing.T) {
 	if key2 != "key2 value" {
 		t.Errorf("unexpected value for key2: %s", key2)
 	}
+
+	// Test lock
+	err = client.Lock("key2")
+	if err != nil {
+		t.Errorf("lock error: %s", err)
+	}
+
+	err = client.Set("key2", "key2 is locked", 0)
+	if err == nil {
+		t.Errorf("key locked error: %s", err)
+	}
+
+	// Test unlock
+	err = client.Unlock("key2")
+	if err != nil {
+		t.Errorf("unlock error: %s", err)
+	}
+
+	// Test delete
+	err = client.Del("key2")
+	if err != nil {
+		t.Errorf("del error: %s", err)
+	}
 }
