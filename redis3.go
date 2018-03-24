@@ -17,7 +17,8 @@ type Client struct {
 	ctx context.Context
 }
 
-// KeyMetadata defines RediS3 key matadata
+// KeyMetadata defines RediS3 key matadata which provides some useful
+// information about the stored object.
 type KeyMetadata struct {
 	ValueType  string
 	Locked     bool

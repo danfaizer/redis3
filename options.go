@@ -7,7 +7,14 @@ type Options struct {
 	// AWS S3 bucket to be selected as database persistent storage.
 	Bucket string
 
-	// AWS Region where S3 bucket is created.
+	// When AutoCreateBucket is set to true the client will try to create the
+	// the AWS S3 bucket if it doesn't exist.
+	// Of course, AWS credentials/instance profile requires proper permissions
+	// so the client can create the bucket in S3.
+	// Default is false.
+	AutoCreateBucket bool
+
+	// AWS Region where S3 bucket is located/created.
 	Region string
 
 	// AWS API Endpoint
@@ -18,6 +25,7 @@ type Options struct {
 	Timeout int
 
 	// ReadOnly enables read only queries.
+	// Default is false.
 	readOnly bool
 
 	// EnforceConsistency enables key locking while modifying keys.

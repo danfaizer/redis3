@@ -44,6 +44,7 @@ func TestRediS3Client(t *testing.T) {
 	client, err := redis3.NewClient(
 		&redis3.Options{
 			Bucket:             "redis3-test",
+			AutoCreateBucket:   true,
 			Region:             "eu-west-1",
 			Timeout:            1,
 			Endpoint:           "http://127.0.0.1:5001",

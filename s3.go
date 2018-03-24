@@ -69,6 +69,29 @@ func (c *Client) checkS3Client() error {
 			return nil
 		}
 	}
+	// If BucketAutoCreate is set to true, try to create AWS S3 Bucket.
+	if c.opt.AutoCreateBucket {
+		ctx, cancel := context.WithTimeout(
+			context.Background(),
+			time.Duration(c.opt.Timeout)*time.Second,
+		)
+		defer cancel()
+
+		_, err := c.svc.CreateBucketWithContext(ctx, &s3.CreateBucketInput{
+			Bucket: aws.String(c.opt.Bucket),
+			CreateBucketConfiguration: &s3.CreateBucketConfiguration{
+				LocationConstraint: aws.String(c.opt.Region),
+			},
+		},
+		)
+		if err != nil {
+			// Error when trying to create bucket
+			return err
+		} else {
+			// Bucket has been properly created
+			return nil
+		}
+	}
 	return errors.New("client: specified bucket does not exist")
 }
 
