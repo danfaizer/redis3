@@ -3,7 +3,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/danfaizer/redis3)](https://goreportcard.com/report/github.com/danfaizer/redis3)
 [![GoDoc](https://godoc.org/github.com/danfaizer/redis3?status.svg)](https://godoc.org/github.com/danfaizer/redis3)
 # RediS3
-Poor's man HA and distributed key-value storage GO library running on top of AWS S3.
+Poor man's HA and distributed key-value storage GO library running on top of AWS S3.
 
 In some projects/PoC you may require some kind of persistence, perhaps accessible from different nodes/processes and in a key-value format.<br>
 **RediS3** is a simple **key-value** library that leverages **AWS S3** to provide **HA** and **distributed persistence**.
